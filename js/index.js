@@ -10,8 +10,25 @@ const region_color = {
   'area': "aaaaaa"
 };
 
+const DEF_map_style = {
+  // エリアの背景色
+  "area": {
+    "default": "dcdcdc"
+  },
+  // テキスト(岡山県,岡山市,....)の色
+  "label": {
+    "default": "696969"
+  },
+  // エリアの境界線の色
+  "border": {
+    "default": "aaa"
+  },
+  // バックグラウンド(海)の色
+  "bg": "b0c4de"
+}
+
 function setRegionStyle(r) {
-  const default_color = map_style.area.default;
+  let map_style = DEF_map_style;
   let s,f;
   switch (r) {
     case '北海道':
@@ -41,34 +58,23 @@ function setRegionStyle(r) {
     default:
   }
   let area_color = {
-    "default": default_color
+    "default": DEF_map_style.area.default
   }
   for (let i=s; i<=f; i++) {
     const key = ("0" + i).slice(-2);
     area_color[key] = region_color.area;
   }
   map_style.area = area_color;
+
+  return map_style;
 }
 
 function goToRegion(button) {
   const r = button.value;
-  setRegionStyle(r);
+  const map_style = setRegionStyle(r);
 
   blankmap.setStyle(map_style)
   map.setLayerSet("blankmap")
-}
-
-var map_style = {
-  // テキスト(岡山県,岡山市,....)の色
-  "label": {
-    "default": "696969"
-  },
-  // エリアの境界線の色
-  "border": {
-    "default": "aaa"
-  },
-  // バックグラウンド(海)の色
-  "bg": "b0c4de"
 }
 
 window.onload = function() {
@@ -82,9 +88,7 @@ window.onload = function() {
 
   //白地図レイヤーを作成
   blankmap = new Y.BlankMapLayer();
-  map_style.area = {
-    "default": "dcdcdc"
-  }
+  let map_style = DEF_map_style;
   blankmap.setStyle(map_style)
   // レイヤーセットの作成
   var layerset = new Y.LayerSet("白地図", [blankmap], {
