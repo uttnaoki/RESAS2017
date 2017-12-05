@@ -116,7 +116,6 @@ function goToRegion(button) {
   const region_style = setRegionStyle(r);
 
   blankmap.setStyle(region_style.map)
-  map.setLayerSet("blankmap")
   const p = new Y.LatLng(region_style.lat, region_style.lng);
   map.setZoom(region_style.zoom_level, true, p, true);
 }
