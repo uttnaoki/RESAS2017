@@ -1,5 +1,6 @@
-var region = ['北海道', '東北', '関東', '中部', '近畿', '中国', '四国', '九州'];
-for (var r of region) {
+// 地域選択ボタンを作成
+const region = ['北海道', '東北', '関東', '中部', '近畿', '中国', '四国', '九州'];
+for (const r of region) {
   $("#button").append('<button type="button" '
     + 'value="' + r + '" '
     + 'onClick="goToRegion(this)">'
@@ -27,9 +28,11 @@ const DEF_map_style = {
   "bg": "b0c4de"
 }
 
+// 地域選択後に描画するマップのスタイルを作成
 function setRegionStyle(r) {
-  let region_style = {};
-  let s, f;
+  let region_style = {}; // 返り値
+  let s, f; // 選択地域の最初の都道府県コード(s)と最後の都道府県コード(f)
+
   switch (r) {
     case '北海道':
       s=1; f=1;
@@ -97,6 +100,7 @@ function setRegionStyle(r) {
       break;
     default:
   }
+
   let area_color = {
     "default": DEF_map_style.area.default
   }
@@ -104,6 +108,7 @@ function setRegionStyle(r) {
     const key = ("0" + i).slice(-2);
     area_color[key] = region_color.area;
   }
+
   let map_style = DEF_map_style;
   map_style.area = area_color;
   region_style.map = map_style;
@@ -111,6 +116,7 @@ function setRegionStyle(r) {
   return region_style;
 }
 
+// 選択地域の色変更と地域への画面遷移
 function goToRegion(button) {
   const r = button.value;
   const region_style = setRegionStyle(r);
@@ -134,7 +140,7 @@ window.onload = function() {
   let map_style = DEF_map_style;
   blankmap.setStyle(map_style)
   // レイヤーセットの作成
-  var layerset = new Y.LayerSet("白地図", [blankmap], {
+  const layerset = new Y.LayerSet("白地図", [blankmap], {
     "maxZoom": 20,
     "minZoom": 6
   });
