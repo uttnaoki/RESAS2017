@@ -7,6 +7,17 @@ for (const r of region) {
     + r + '</button>')
 }
 
+// ラジオボタンを作成
+for (let i=1; i<=5; i++) {
+  $("#r1").append('<input type="radio" name="r1" '
+    + 'value="' + i + '" '
+    + 'onchange="tmp(' + i + ')">'
+    + i)
+}
+function tmp(i) {
+  console.log(i);
+}
+
 const region_color = {
   'area': "aaaaaa"
 };
