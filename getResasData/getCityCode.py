@@ -1,4 +1,9 @@
 # coding:utf-8
+
+# 以下を出力するプログラム
+# city_CodeColor.js ("市区町村コード": "カラーコード")
+# city_NameCode.js ("市区町村名": "市区町村コード")
+
 import requests
 import json
 from time import sleep
