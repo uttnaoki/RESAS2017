@@ -43,6 +43,7 @@ const DEF_map_style = {
 function setRegionStyle(r) {
   let region_style = {}; // 返り値
   let s, f; // 選択地域の最初の都道府県コード(s)と最後の都道府県コード(f)
+  let dataset = dataset_areaFee[r];
 
   switch (r) {
     case '北海道':
@@ -115,9 +116,18 @@ function setRegionStyle(r) {
   let area_color = {
     "default": DEF_map_style.area.default
   }
-  for (let i=s; i<=f; i++) {
-    const key = ("0" + i).slice(-2);
-    area_color[key] = region_color.area;
+  function defOpacity(value) {
+    if (value>50000) return 1;
+    else if (value <= 10000) return 0.2;
+    else return Math.floor(value/10000)*0.2;
+  }
+  function defColorCode(value) {
+    const opacity = defOpacity(value);
+    const gb = ('0' + (1-opacity).toString(16)).slice(-2)
+    return 'ff' + gb + gb;
+  }
+  for (let d of dataset){
+    area_color[d.cityCode] = defColorCode(d.areaFee);
   }
 
   let map_style = DEF_map_style;
