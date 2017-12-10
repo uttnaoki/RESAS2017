@@ -7,15 +7,14 @@ for (const r of region) {
     + r + '</button>')
 }
 
-// ラジオボタンを作成
-for (let i=1; i<=5; i++) {
-  $("#r1").append('<input type="radio" name="r1" '
-    + 'value="' + i + '" '
-    + 'onchange="tmp(' + i + ')">'
-    + i)
-}
-function tmp(i) {
-  console.log(i);
+function tmp(con, value) {
+  switch (con) {
+    case '土地代':
+      demand.areaFee = value;
+      break;
+    default:
+  }
+  makeHeatLayer();
 }
 
 const region_color = {
@@ -33,114 +32,154 @@ const DEF_map_style = {
   },
   // エリアの境界線の色
   "border": {
-    "default": "aaa"
+    "default": "aaa",
+    "state": "555"
   },
   // バックグラウンド(海)の色
   "bg": "b0c4de"
 }
 
-// 地域選択後に描画するマップのスタイルを作成
-function setRegionStyle(r) {
-  let region_style = {}; // 返り値
-  let s, f; // 選択地域の最初の都道府県コード(s)と最後の都道府県コード(f)
-  let dataset = dataset_areaFee[r];
+var region_style = {
+  "lat": 37,
+  "lng": 135.2,
+  "zoom_level": 6
+};
+var select_area = '全国';
+var demand = {};
+var result = {};
 
+function setViewArea(r) {
   switch (r) {
     case '北海道':
-      s=1; f=1;
-      region_style = {
-        "lat": 43.568246,
-        "lng": 142.740234,
-        "zoom_level": 8
-      };
-      break;
+    view_area = {
+      "lat": 43.568246,
+      "lng": 142.740234,
+      "zoom_level": 8
+    };
+    break;
     case '東北':
-      s=2; f=7;
-      region_style = {
-        "lat": 39.338327,
-        "lng": 140.916504,
-        "zoom_level": 8
-      };
-      break;
+    view_area = {
+      "lat": 39.338327,
+      "lng": 140.916504,
+      "zoom_level": 8
+    };
+    break;
     case '関東':
-      s=8; f=14;
-      region_style = {
-        "lat": 35.764113,
-        "lng": 139.823364,
-        "zoom_level": 9
-      };
-      break;
+    view_area = {
+      "lat": 35.764113,
+      "lng": 139.823364,
+      "zoom_level": 9
+    };
+    break;
     case '中部':
-      s=15; f=23;
-      region_style = {
-        "lat": 35.968885,
-        "lng": 137.373413,
-        "zoom_level": 8
-      };
-      break;
+    view_area = {
+      "lat": 35.968885,
+      "lng": 137.373413,
+      "zoom_level": 8
+    };
+    break;
     case '近畿':
-      s=24; f=30;
-      region_style = {
-        "lat": 34.903720,
-        "lng": 135.654053,
-        "zoom_level": 9
-      };
-      break;
+    view_area = {
+      "lat": 34.903720,
+      "lng": 135.654053,
+      "zoom_level": 9
+    };
+    break;
     case '中国':
-      s=31; f=35;
-      region_style = {
-        "lat": 34.822590,
-        "lng": 132.825073,
-        "zoom_level": 9
-      };
-      break;
+    view_area = {
+      "lat": 34.822590,
+      "lng": 132.825073,
+      "zoom_level": 9
+    };
+    break;
     case '四国':
-      s=36; f=39;
-      region_style = {
-        "lat": 33.586931,
-        "lng": 133.495239,
-        "zoom_level": 9
-      };
-      break;
+    view_area = {
+      "lat": 33.586931,
+      "lng": 133.495239,
+      "zoom_level": 9
+    };
+    break;
     case '九州':
-      s=40; f=47;
-      region_style = {
-        "lat": 30.867987,
-        "lng": 130.787109,
-        "zoom_level": 7
-      };
-      break;
+    view_area = {
+      "lat": 30.867987,
+      "lng": 130.787109,
+      "zoom_level": 7
+    };
+    break;
     default:
   }
 
+  return view_area;
+}
+
+function calNormAreaFee(value){
+  if (value>50000) return 1;
+  else if (value <= 10000) return 0.2;
+  else return Math.floor(value/10000)*0.2;
+}
+
+function normAreaFee() {
+  let dataset;
+  if (select_area == '全国') {
+    dataset = dataset_ken;
+    for (let i in dataset) {
+      dataset[i].areaCode = ('0' + i).slice(-2)
+    }
+  } else {
+    dataset = dataset_areaFee[select_area];
+  }
+  result.areaFee = {};
+  for (let d of dataset){
+    result.areaFee[d.areaCode] = calNormAreaFee(d.areaFee);
+  }
+}
+
+// 地域選択後に描画するマップのスタイルを作成
+function makeHeatLayer(zoom_flag) {
   let area_color = {
     "default": DEF_map_style.area.default
   }
-  function defOpacity(value) {
-    if (value>50000) return 1;
-    else if (value <= 10000) return 0.2;
-    else return Math.floor(value/10000)*0.2;
-  }
-  function defColorCode(value) {
-    const opacity = defOpacity(value);
-    const gb = ('0' + (1-opacity).toString(16)).slice(-2)
+  function defColorCode(match_value) {
+    // const match_value = normAreaFee(value);
+    const gb = ('0' + (1-match_value).toString(16)).slice(-2)
     return 'ff' + gb + gb;
   }
-  for (let d of dataset){
-    area_color[d.cityCode] = defColorCode(d.areaFee);
+  for (let d in demand) {
+    switch (d) {
+      case 'areaFee':
+        normAreaFee();
+        break;
+      default:
+    }
   }
+  if (Object.keys(result).length) {
+    for (let i in result.areaFee){
+      area_color[i] = defColorCode(result.areaFee[i]);
+    }
+    //
+    let map_style = DEF_map_style;
+    map_style.area = area_color;
+    region_style.map = map_style;
 
-  let map_style = DEF_map_style;
-  map_style.area = area_color;
-  region_style.map = map_style;
-
-  return region_style;
+    blankmap.setStyle(region_style.map)
+    if(!zoom_flag)map.setLayerSet("blankmap");
+  } else {
+    region_style.map = DEF_map_style;
+  }
 }
 
 // 選択地域の色変更と地域への画面遷移
 function goToRegion(button) {
   const r = button.value;
-  const region_style = setRegionStyle(r);
+  // lat, lng, zoom_level の取得
+  const view_area = setViewArea(r);
+  for (let key in view_area) {
+    region_style[key] = view_area[key]
+  }
+  select_area = r;
+
+  // region_style.map = DEF_map_style;
+  makeHeatLayer(1);
 
   blankmap.setStyle(region_style.map)
   const p = new Y.LatLng(region_style.lat, region_style.lng);

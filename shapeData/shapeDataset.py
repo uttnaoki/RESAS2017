@@ -25,8 +25,8 @@ for d in input_data:
             + '"' + region[index] + '":['
 
     output = output + '{' \
-        + '"cityCode":"' + d[0] + '",' \
-        + '"cityName":"' + d[1] + '",' \
+        + '"areaCode":"' + d[0] + '",' \
+        + '"areaName":"' + d[1] + '",' \
         + '"areaFee":"' + str(areaFee) + '",' \
         + '"populationDencity":' + str(popDen) \
         + '},'
