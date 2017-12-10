@@ -55,7 +55,7 @@ function normAreaFee() {
       dataset[i].areaCode = ('0' + i).slice(-2)
     }
   } else {
-    dataset = dataset_areaFee[select_area];
+    dataset = dataset_shikuchoson[select_area];
   }
   result.areaFee = {};
   for (let d of dataset){

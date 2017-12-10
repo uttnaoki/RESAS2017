@@ -12,7 +12,7 @@ index = 0
 # s = region[index][0]
 # e = region[index][1]
 
-output = 'var dataset_areaFee={"北海道":['
+output = 'var dataset_shikuchoson={"北海道":['
 header = next(input_data)
 for d in input_data:
     pref_code = math.floor(int(d[0])/1000)
@@ -25,7 +25,7 @@ for d in input_data:
             + '"' + region[index] + '":['
 
     output = output + '{' \
-        + '"areaCode":"' + d[0] + '",' \
+        + '"areaCode":"' + d[0].rjust(5, '0') + '",' \
         + '"areaName":"' + d[1] + '",' \
         + '"areaFee":"' + str(areaFee) + '",' \
         + '"populationDencity":' + str(popDen) \
