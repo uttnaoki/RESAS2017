@@ -41,22 +41,40 @@ function listenRequest(type, value) {
   makeHeatLayer();
 }
 
-function calNormAreaFee(value){
-  if (value>50000) return 1;
-  else if (value <= 10000) return 0.2;
-  else return Math.floor(value/10000)*0.2;
+function normalization(req, value, degree){
+  let norm_val;
+  switch (req) {
+    case 'areaFee':
+      if (value>50000) norm_val = 1;
+      else if (value <= 10000) norm_val = 0.2;
+      else norm_val = Math.floor(value/10000)*0.2;
+      break;
+    case 'popDencity':
+      norm_val = 0.2;
+      break;
+    case 'tempAverage':
+      norm_val = 0.4;
+      break;
+    case 'salary':
+      norm_val = 0.6;
+      break;
+    default:
+      console.log('"' + req + '"に対する正規化処理は定義されていません.');
+  }
+  return norm_val;
 }
 
-function normAreaFee() {
+function setNormParam(request_name, request_degree) {
   let dataset;
   if (select_area == '全国') {
     dataset = dataset_todofuken;
   } else {
     dataset = dataset_shikuchoson[select_area];
   }
-  result.areaFee = {};
+
+  result[request_name] = {};
   for (let d of dataset){
-    result.areaFee[d.areaCode] = calNormAreaFee(d.areaFee);
+    result[request_name][d.areaCode] = normalization(request_name, d[request_name], request_degree);
   }
 }
 
@@ -66,18 +84,12 @@ function makeHeatLayer(zoom_flag) {
     "default": DEF_map_style().area.default
   }
   function defColorCode(match_value) {
-    // const match_value = normAreaFee(value);
     const gb = ('0' + (1-match_value).toString(16)).slice(-2)
     return 'ff' + gb + gb;
   }
   result = {};
-  for (let d in request) {
-    switch (d) {
-      case 'areaFee':
-        normAreaFee();
-        break;
-      default:
-    }
+  for (let r in request) {
+    setNormParam(r, request[r]);
   }
   if (Object.keys(result).length) {
     for (let i in result.areaFee){
