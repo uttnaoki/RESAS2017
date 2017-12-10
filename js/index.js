@@ -1,15 +1,3 @@
-// 地域選択ボタンを作成
-
-function listenRequest(con, value) {
-  switch (con) {
-    case '土地代':
-      demand.areaFee = value;
-      break;
-    default:
-  }
-  makeHeatLayer();
-}
-
 const region_color = {
   'area': "aaaaaa"
 };
@@ -38,8 +26,17 @@ var region_style = {
   "zoom_level": 6
 };
 var select_area = '全国';
-var demand = {};
+var request = {};
 var result = {};
+
+function listenRequest(type, value) {
+  if (value == 0) {
+    delete request[type];
+  } else {
+    request[type] = value;
+  }
+  makeHeatLayer();
+}
 
 function calNormAreaFee(value){
   if (value>50000) return 1;
@@ -70,7 +67,7 @@ function makeHeatLayer(zoom_flag) {
     const gb = ('0' + (1-match_value).toString(16)).slice(-2)
     return 'ff' + gb + gb;
   }
-  for (let d in demand) {
+  for (let d in request) {
     switch (d) {
       case 'areaFee':
         normAreaFee();
