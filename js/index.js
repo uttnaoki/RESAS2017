@@ -2,22 +2,25 @@ const region_color = {
   'area': "aaaaaa"
 };
 
-const DEF_map_style = {
-  // エリアの背景色
-  "area": {
-    "default": "dcdcdc"
-  },
-  // テキスト(岡山県,岡山市,....)の色
-  "label": {
-    "default": "696969"
-  },
-  // エリアの境界線の色
-  "border": {
-    "default": "aaa",
-    "state": "555"
-  },
-  // バックグラウンド(海)の色
-  "bg": "b0c4de"
+const DEF_map_style = function() {
+  const dms = {
+    // エリアの背景色
+    "area": {
+      "default": "dcdcdc"
+    },
+    // テキスト(岡山県,岡山市,....)の色
+    "label": {
+      "default": "696969"
+    },
+    // エリアの境界線の色
+    "border": {
+      "default": "aaa",
+      "state": "555"
+    },
+    // バックグラウンド(海)の色
+    "bg": "b0c4de"
+  };
+  return dms;
 }
 
 var region_style = {
@@ -60,13 +63,14 @@ function normAreaFee() {
 // 地域選択後に描画するマップのスタイルを作成
 function makeHeatLayer(zoom_flag) {
   let area_color = {
-    "default": DEF_map_style.area.default
+    "default": DEF_map_style().area.default
   }
   function defColorCode(match_value) {
     // const match_value = normAreaFee(value);
     const gb = ('0' + (1-match_value).toString(16)).slice(-2)
     return 'ff' + gb + gb;
   }
+  result = {};
   for (let d in request) {
     switch (d) {
       case 'areaFee':
@@ -79,16 +83,14 @@ function makeHeatLayer(zoom_flag) {
     for (let i in result.areaFee){
       area_color[i] = defColorCode(result.areaFee[i]);
     }
-    //
-    let map_style = DEF_map_style;
+    let map_style = DEF_map_style();
     map_style.area = area_color;
     region_style.map = map_style;
-
-    blankmap.setStyle(region_style.map)
-    if(!zoom_flag)map.setLayerSet("blankmap");
   } else {
-    region_style.map = DEF_map_style;
+    region_style.map = DEF_map_style();
   }
+  blankmap.setStyle(region_style.map)
+  if(!zoom_flag)map.setLayerSet("blankmap");
 }
 
 // 選択地域の色変更と地域への画面遷移
@@ -118,7 +120,7 @@ window.onload = function() {
 
   //白地図レイヤーを作成
   blankmap = new Y.BlankMapLayer();
-  let map_style = DEF_map_style;
+  let map_style = DEF_map_style();
   blankmap.setStyle(map_style)
   // レイヤーセットの作成
   const layerset = new Y.LayerSet("白地図", [blankmap], {
