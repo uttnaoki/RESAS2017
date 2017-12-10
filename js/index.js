@@ -41,6 +41,7 @@ function listenRequest(type, value) {
   makeHeatLayer();
 }
 
+// 希望値に対する地域のマッチ度を返却(正規化処理)
 function normalization(req, value, degree){
   let norm_val;
   switch (req) {
@@ -78,6 +79,7 @@ function setNormParam(request_name, request_degree) {
   }
 }
 
+// 最終的な正規化処理を実行し，カラーコードを返却
 function setColorCode(city_code, len) {
   let match_value = 0;
   for (const req in result) {
