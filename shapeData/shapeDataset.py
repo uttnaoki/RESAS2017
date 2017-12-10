@@ -28,7 +28,7 @@ for d in input_data:
         + '"areaCode":"' + d[0].rjust(5, '0') + '",' \
         + '"areaName":"' + d[1] + '",' \
         + '"areaFee":"' + str(areaFee) + '",' \
-        + '"populationDencity":' + str(popDen) \
+        + '"popDencity":' + str(popDen) \
         + '},'
 f.close()
 
