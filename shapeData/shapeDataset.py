@@ -16,17 +16,20 @@ output = 'var dataset_areaFee={"北海道":['
 header = next(input_data)
 for d in input_data:
     pref_code = math.floor(int(d[0])/1000)
-    if d[2]:
-        if pref_code>lastID[index]:
-            index += 1
-            output = output[:-1] + '],' \
-                + '"' + region[index] + '":['
+    areaFee = d[2] if d[2] and d[2] != '#N/A' else 0
+    popDen = d[3] if d[3] and d[3] != '#N/A' else 0
 
-        output = output + '{' \
-            + '"cityCode":"' + d[0] + '",' \
-            + '"cityName":"' + d[1] + '",' \
-            + '"areaFee":' + d[2] \
-            + '},'
+    if pref_code>lastID[index]:
+        index += 1
+        output = output[:-1] + '],' \
+            + '"' + region[index] + '":['
+
+    output = output + '{' \
+        + '"cityCode":"' + d[0] + '",' \
+        + '"cityName":"' + d[1] + '",' \
+        + '"areaFee":"' + str(areaFee) + '",' \
+        + '"populationDencity":' + str(popDen) \
+        + '},'
 f.close()
 
 output = output[:-1] + ']}'
