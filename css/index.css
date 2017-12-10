@@ -73,7 +73,7 @@ body {
   padding: 0;
   text-align: center;
 }
-#dropmenu li a{
+#dropmenu li div{
   height: 100%;
   display: flex;
   margin: 0;
@@ -86,11 +86,11 @@ body {
   line-height: 1;
   text-decoration: none;
 }
-#dropmenu li:hover > a{
+#dropmenu li:hover > div{
   background: #6e7c0c;
   color: #eff7b1;
 }
-#dropmenu > li:hover > a{
+#dropmenu > li:hover > div{
   border-radius: 3px 3px 0 0;
 }
 #dropmenu li ul{
@@ -119,11 +119,12 @@ body {
   -ms-transition: .2s;
   transition: .2s;
 }
-#dropmenu li ul li a{
+#dropmenu li ul li div{
   background: #6e7c0c;
   text-align: left;
   font-size: 14px;
   font-weight: normal;
+  cursor : pointer;
 }
 #dropmenu li ul li {
   background: #6e7c0c;
@@ -137,7 +138,7 @@ body {
   border-top: 1px solid #7c8c0e;
   border-bottom: 1px solid #616d0b;
 }
-#dropmenu li ul li a:hover{
+#dropmenu li ul li div:hover{
   background: #616d0b;
   color: #eff7b1;
 }
@@ -147,6 +148,6 @@ body {
 #dropmenu li:hover ul li:last-child{
   border-bottom: 0;
 }
-#dropmenu li:hover ul li:last-child a{
+#dropmenu li:hover ul li:last-child div{
   border-radius: 0 0 3px 3px;
 }
