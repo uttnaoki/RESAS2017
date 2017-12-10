@@ -78,22 +78,30 @@ function setNormParam(request_name, request_degree) {
   }
 }
 
+function setColorCode(city_code, len) {
+  let match_value = 0;
+  for (const req in result) {
+    match_value += result[req][city_code];
+  }
+  match_value /= len;
+  const gb = ('0' + (1-match_value).toString(16)).slice(-2);
+  return 'ff' + gb + gb;
+}
+
 // 地域選択後に描画するマップのスタイルを作成
 function makeHeatLayer(zoom_flag) {
   let area_color = {
     "default": DEF_map_style().area.default
   }
-  function defColorCode(match_value) {
-    const gb = ('0' + (1-match_value).toString(16)).slice(-2)
-    return 'ff' + gb + gb;
-  }
   result = {};
   for (let r in request) {
     setNormParam(r, request[r]);
   }
-  if (Object.keys(result).length) {
-    for (let i in result.areaFee){
-      area_color[i] = defColorCode(result.areaFee[i]);
+  const key = Object.keys(result)[0];
+  const len = Object.keys(result).length;
+  if (key) {
+    for (let i in result[key]){
+      area_color[i] = setColorCode(i, len);
     }
     let map_style = DEF_map_style();
     map_style.area = area_color;
