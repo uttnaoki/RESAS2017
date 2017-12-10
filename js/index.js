@@ -51,9 +51,6 @@ function normAreaFee() {
   let dataset;
   if (select_area == '全国') {
     dataset = dataset_todofuken;
-    for (let i in dataset) {
-      dataset[i].areaCode = ('0' + i).slice(-2)
-    }
   } else {
     dataset = dataset_shikuchoson[select_area];
   }
