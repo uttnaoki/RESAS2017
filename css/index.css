@@ -3,17 +3,23 @@ body {
   margin-top: 2%;
 }
 
+.adjust{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 #form {
   margin-left: 10%;
   margin-right: 10%;
+  margin-bottom: 20px;
   padding: 20px;
   border:#737373 solid 2px;
   border-radius: 15px;
 }
 #button button {
-  width: 80px;
+  /*width: 80px;
   height: 30px;
-  margin-right: 5px;
+  margin-right: 100px;*/
 }
 
 #map {
@@ -21,4 +27,126 @@ body {
   /*width: 80%;*/
   margin: 0 10%;
   height: 80%;
+  z-index:1;
+}
+
+.category{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.square_btn{
+    /*width : 20%;*/
+    font-size: 15px;
+    position: relative;
+    font-weight: bold;
+    padding: 0.25em 0.5em;
+    color: #2FCDB4;
+    background: #F8F8F8;
+    text-decoration: none;
+    transition: .4s;
+    border-width: 0;
+  }
+
+.square_btn:hover {
+    background: #2FCDB4;
+    color: #F8F8F8;
+
+}
+
+#dropmenu{
+  list-style-type: none;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 100px;
+  padding: 0;
+  background: #8a9b0f;
+  border-bottom: 5px solid #535d09;
+  border-radius: 3px 3px 0 0;
+}
+#dropmenu li{
+  height: 100%;
+  position: relative;
+  width: 20%;
+  float: left;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+#dropmenu li a{
+  height: 100%;
+  display: flex;
+  margin: 0;
+  /*padding: 15px 0 11px;*/
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  align-items: center;
+	justify-content: center;
+  line-height: 1;
+  text-decoration: none;
+}
+#dropmenu li:hover > a{
+  background: #6e7c0c;
+  color: #eff7b1;
+}
+#dropmenu > li:hover > a{
+  border-radius: 3px 3px 0 0;
+}
+#dropmenu li ul{
+  z-index: 2;
+  list-style: none;
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  border-radius: 0 0 3px 3px;
+}
+/*#dropmenu li:last-child ul{
+  left: -100%;
+  width: 100%
+}*/
+#dropmenu li ul li{
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  color: #fff;
+  -moz-transition: .2s;
+  -webkit-transition: .2s;
+  -o-transition: .2s;
+  -ms-transition: .2s;
+  transition: .2s;
+}
+#dropmenu li ul li a{
+  background: #6e7c0c;
+  text-align: left;
+  font-size: 14px;
+  font-weight: normal;
+}
+#dropmenu li ul li {
+  background: #6e7c0c;
+  text-align: left;
+  font-size: 14px;
+  font-weight: normal;
+}
+#dropmenu li:hover ul li{
+  overflow: visible;
+  height: 38px;
+  border-top: 1px solid #7c8c0e;
+  border-bottom: 1px solid #616d0b;
+}
+#dropmenu li ul li a:hover{
+  background: #616d0b;
+  color: #eff7b1;
+}
+#dropmenu li:hover ul li:first-child{
+  border-top: 0;
+}
+#dropmenu li:hover ul li:last-child{
+  border-bottom: 0;
+}
+#dropmenu li:hover ul li:last-child a{
+  border-radius: 0 0 3px 3px;
 }

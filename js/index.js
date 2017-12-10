@@ -1,13 +1,6 @@
 // 地域選択ボタンを作成
-const region = ['北海道', '東北', '関東', '中部', '近畿', '中国', '四国', '九州'];
-for (const r of region) {
-  $("#button").append('<button type="button" '
-    + 'value="' + r + '" '
-    + 'onClick="goToRegion(this)">'
-    + r + '</button>')
-}
 
-function tmp(con, value) {
+function listenRequest(con, value) {
   switch (con) {
     case '土地代':
       demand.areaFee = value;
@@ -50,62 +43,69 @@ var result = {};
 
 function setViewArea(r) {
   switch (r) {
+    case '全国':
+      view_area = {
+        "lat": 37,
+        "lng": 135.2,
+        "zoom_level": 6
+      }
+      break;
     case '北海道':
-    view_area = {
-      "lat": 43.568246,
-      "lng": 142.740234,
-      "zoom_level": 8
-    };
-    break;
+      view_area = {
+        "lat": 43.568246,
+        "lng": 142.740234,
+        "zoom_level": 8
+      };
+      break;
     case '東北':
-    view_area = {
-      "lat": 39.338327,
-      "lng": 140.916504,
-      "zoom_level": 8
-    };
-    break;
+      view_area = {
+        "lat": 39.338327,
+        "lng": 140.916504,
+        "zoom_level": 8
+      };
+      break;
     case '関東':
-    view_area = {
-      "lat": 35.764113,
-      "lng": 139.823364,
-      "zoom_level": 9
-    };
-    break;
+      view_area = {
+        "lat": 35.764113,
+        "lng": 139.823364,
+        "zoom_level": 9
+      };
+      break;
     case '中部':
-    view_area = {
-      "lat": 35.968885,
-      "lng": 137.373413,
-      "zoom_level": 8
-    };
-    break;
+      view_area = {
+        "lat": 35.968885,
+        "lng": 137.373413,
+        "zoom_level": 8
+      };
+      break;
     case '近畿':
-    view_area = {
-      "lat": 34.903720,
-      "lng": 135.654053,
-      "zoom_level": 9
-    };
-    break;
+      view_area = {
+        "lat": 34.903720,
+        "lng": 135.654053,
+        "zoom_level": 9
+      };
+      break;
     case '中国':
-    view_area = {
-      "lat": 34.822590,
-      "lng": 132.825073,
-      "zoom_level": 9
-    };
-    break;
+      view_area = {
+        "lat": 34.822590,
+        "lng": 132.825073,
+        "zoom_level": 9
+      };
+      break;
     case '四国':
-    view_area = {
-      "lat": 33.586931,
-      "lng": 133.495239,
-      "zoom_level": 9
-    };
-    break;
+      view_area = {
+        "lat": 33.586931,
+        "lng": 133.495239,
+        "zoom_level": 9
+      };
+      break;
     case '九州':
-    view_area = {
-      "lat": 30.867987,
-      "lng": 130.787109,
-      "zoom_level": 7
-    };
-    break;
+      view_area = {
+        "lat": 30.867987,
+        "lng": 130.787109,
+        "zoom_level": 7
+      };
+      break;
     default:
   }
 
@@ -169,16 +169,14 @@ function makeHeatLayer(zoom_flag) {
 }
 
 // 選択地域の色変更と地域への画面遷移
-function goToRegion(button) {
-  const r = button.value;
+function goToSelectArea(area) {
   // lat, lng, zoom_level の取得
-  const view_area = setViewArea(r);
+  const view_area = setViewArea(area);
   for (let key in view_area) {
     region_style[key] = view_area[key]
   }
-  select_area = r;
+  select_area = area;
 
-  // region_style.map = DEF_map_style;
   makeHeatLayer(1);
 
   blankmap.setStyle(region_style.map)

@@ -15,16 +15,61 @@
     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> -->
   <link rel="stylesheet" href="css/index.css">
   <body>
-    <div id="form">
-      <div>地方選択</div>
-      <div id="button"></div>
-      <div>基準選択</div>
-      <div id="r1"></div>
-      <input type="radio" name="r2" value="1" onchange="tmp('土地代',1)">1
-      <input type="radio" name="r2" value="2" onchange="tmp('土地代',2)">2
-      <input type="radio" name="r2" value="3" onchange="tmp('土地代',3)">3
-      <input type="radio" name="r2" value="4" onchange="tmp('土地代',4)">4
-    </div>
+    <ul id="dropmenu">
+        <li><a href="#">地方選択</a>
+          <ul>
+            <li><a href="#" onclick="goToSelectArea('全国')">全国（都道府県表示）</a></li>
+            <li><a href="#" onclick="goToSelectArea('北海道')">北海道</a></li>
+            <li><a href="#" onclick="goToSelectArea('東北')">東北</a></li>
+            <li><a href="#" onclick="goToSelectArea('関東')">関東</a></li>
+            <li><a href="#" onclick="goToSelectArea('中部')">近畿</a></li>
+            <li><a href="#" onclick="goToSelectArea('中国')">中国</a></li>
+            <li><a href="#" onclick="goToSelectArea('四国')">四国</a></li>
+            <li><a href="#" onclick="goToSelectArea('九州')">九州</a></li>
+            <li><a href="#" onclick="goToSelectArea('沖縄')">沖縄</a></li>
+          </ul>
+        </li>
+        <li><a href="#">人口密度</a>
+          <ul>
+            <li><a href="#" onclick="listenRequest('指定しない')">指定しない</a></li>
+            <li><a href="#" onclick="listenRequest('にぎやか')">にぎやか</a></li>
+            <li><a href="#" onclick="listenRequest('ややにぎやか')">ややにぎやか</a></li>
+            <li><a href="#" onclick="listenRequest('ふつう')">ふつう</a></li>
+            <li><a href="#" onclick="listenRequest('やや静か')">やや静か</a></li>
+            <li><a href="#" onclick="listenRequest('静か')">静か</a></li>
+          </ul>
+        </li>
+        <li><a href="#">土地代</a>
+          <ul>
+            <li><a href="#" onclick="listenRequest('土地代', '指定しない')">指定しない</a></li>
+            <li><a href="#" onclick="listenRequest('土地代', '高い')">高い</a></li>
+            <li><a href="#" onclick="listenRequest('土地代', 'やや高い')">やや高い</a></li>
+            <li><a href="#" onclick="listenRequest('土地代', 'ふつう')">ふつう</a></li>
+            <li><a href="#" onclick="listenRequest('土地代', 'やや安い')">やや安い</a></li>
+            <li><a href="#" onclick="listenRequest('土地代', '安い')">安い</a></li>
+          </ul>
+        </li>
+        <li><a href="#">賃金</a>
+          <ul>
+            <li><a href="#" onclick="listenRequest('指定しない')">指定しない</a></li>
+            <li><a href="#" onclick="listenRequest('高い')">高い</a></li>
+            <li><a href="#" onclick="listenRequest('やや高い')">やや高い</a></li>
+            <li><a href="#" onclick="listenRequest('ふつう')">ふつう</a></li>
+            <li><a href="#" onclick="listenRequest('やや低い')">やや低い</a></li>
+            <li><a href="#" onclick="listenRequest('低い')">低い</a></li>
+          </ul>
+        </li>
+        <li><a href="#">気候</a>
+          <ul>
+            <li><a href="#" onclick="listenRequest('指定しない')">指定しない</a></li>
+            <li><a href="#" onclick="listenRequest('暖かい')">暖かい</a></li>
+            <li><a href="#" onclick="listenRequest('やや暖かい')">やや暖かい</a></li>
+            <li><a href="#" onclick="listenRequest('ふつう')">ふつう</a></li>
+            <li><a href="#" onclick="listenRequest('やや寒い')">やや寒い</a></li>
+            <li><a href="#" onclick="listenRequest('寒い')">寒い</a></li>
+          </ul>
+        </li>
+      </ul>
     <div id="map"></div>
     <!-- <script type="text/javascript" src="js/city_code.js"></script> -->
     <script type="text/javascript" src="js/dataset.json"></script>
