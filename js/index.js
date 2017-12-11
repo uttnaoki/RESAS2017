@@ -79,55 +79,125 @@ function listenRequest(req_type, degree, degree_text) {
       }
     }
   }
+  for (let r in request_set) {
+    if (!(r === 'popDencity' || r === 'areaFee')) {
+      if (region.indexOf(select_area) >= 0){
+        $('#' + r).removeClass('unuse')
+      } else {
+        $('#' + r).addClass('unuse')
+      }
+    }
+  }
   makeHeatLayer();
 }
 
 // 希望値に対する地域のマッチ度を返却(正規化処理)
-function normalization(req, value, degree){
-  let norm_val;
-  switch (req) {
-    case 'areaFee':
-      if (value>50000) norm_val = 1;
-      else if (value <= 10000) norm_val = 0.2;
-      else norm_val = Math.floor(value/10000)*0.2;
-      break;
-    case 'popDencity':
-      norm_val = 0.2;
-      break;
-    case 'tempAverage':
-      norm_val = 0.4;
-      break;
-    case 'salary':
-      norm_val = 0.6;
-      break;
-    default:
-      console.log('"' + req + '"に対する正規化処理は定義されていません.');
+function normalization(req, value, degree, region_flag){
+  let norm_val = 0;
+  if(region_flag == 0){ // 都道府県別の基準
+    switch (req) {
+      case 'areaFee':
+               if (value > 53943) norm_val = Math.abs(0.2-degree*0.2);
+          else if (value > 31733) norm_val = Math.abs(0.4-degree*0.2);
+          else if (value > 27472) norm_val = Math.abs(0.6-degree*0.2);
+          else if (value > 23349) norm_val = Math.abs(0.8-degree*0.2);
+          else if (value >     0) norm_val = Math.abs(1.0-degree*0.2);
+          break;
+      case 'popDencity':
+               if (value >   521) norm_val = Math.abs(0.2-degree*0.2);
+          else if (value >   311) norm_val = Math.abs(0.4-degree*0.2);
+          else if (value >   192) norm_val = Math.abs(0.6-degree*0.2);
+          else if (value >   143) norm_val = Math.abs(0.8-degree*0.2);
+          else if (value >     0) norm_val = Math.abs(1.0-degree*0.2);
+          break;
+      case 'tempAverage':
+               if (value > 17.43) norm_val = Math.abs(0.2-degree*0.2);
+          else if (value > 16.21) norm_val = Math.abs(0.4-degree*0.2);
+          else if (value > 15.52) norm_val = Math.abs(0.6-degree*0.2);
+          else if (value > 13.40) norm_val = Math.abs(0.8-degree*0.2);
+          else if (value >  0.00) norm_val = Math.abs(1.0-degree*0.2);
+                    console.log(value, norm_val)
+          break;
+      case 'salary':
+               if (value >   436) norm_val = Math.abs(0.2-degree*0.2);
+          else if (value >   417) norm_val = Math.abs(0.4-degree*0.2);
+          else if (value >   388) norm_val = Math.abs(0.6-degree*0.2);
+          else if (value >   361) norm_val = Math.abs(0.8-degree*0.2);
+          else if (value >     0) norm_val = Math.abs(1.0-degree*0.2);
+          break;
+      case 'jobOffers':
+               if (value >  1.26) norm_val = Math.abs(0.2-degree*0.2);
+          else if (value >  1.12) norm_val = Math.abs(0.4-degree*0.2);
+          else if (value >  0.99) norm_val = Math.abs(0.6-degree*0.2);
+          else if (value >  0.95) norm_val = Math.abs(0.8-degree*0.2);
+          else if (value >     0) norm_val = Math.abs(1.0-degree*0.2);
+          break;
+      default:
+          console.log('"' + req + '"に対する正規化処理は定義されていません.');
+          break;
+    }
+  } else { // 市区町村別の基準
+    switch (req) {
+      case 'areaFee':
+               if (value > 42803) norm_val = Math.abs(0.2-degree*0.2);
+          else if (value > 21212) norm_val = Math.abs(0.4-degree*0.2);
+          else if (value > 13101) norm_val = Math.abs(0.6-degree*0.2);
+          else if (value >  7163) norm_val = Math.abs(0.8-degree*0.2);
+          else if (value >     0) norm_val = Math.abs(1.0-degree*0.2);
+          break;
+      case 'popDencity':
+               if (value >  2522) norm_val = Math.abs(0.2-degree*0.2);
+          else if (value >   748) norm_val = Math.abs(0.4-degree*0.2);
+          else if (value > 281.3) norm_val = Math.abs(0.6-degree*0.2);
+          else if (value >   129) norm_val = Math.abs(0.8-degree*0.2);
+          else if (value >     0) norm_val = Math.abs(1.0-degree*0.2);
+          break;
+      case 'tempAverage': console.log('no data');break;
+      case 'salary': console.log('no data');break;
+      case 'jobOffers': console.log('no data'); break;
+      default:
+         console.log('"' + req + '"に対する正規化処理は定義されていません.');
+         break;
+    }
   }
   return norm_val;
 }
 
 function setNormParam(request_name, request_degree) {
   let dataset;
-  if (region.indexOf(select_area) >= 0) {
-    dataset = dataset_todofuken;
-  } else {
+  let region_flag; // region_flag = 0...都道府県, 1...市区町村
+  if (region_flag = region.indexOf(select_area) < 0) {
     dataset = dataset_shikuchoson[select_region];
+  } else {
+    dataset = dataset_todofuken;
   }
-
   result[request_name] = {};
   for (let d of dataset){
-    result[request_name][d.areaCode] = normalization(request_name, d[request_name], request_degree);
+    result[request_name][d.areaCode] = normalization(request_name, d[request_name], request_degree, region_flag);
   }
 }
 
 // 最終的な正規化処理を実行し，カラーコードを返却
-function setColorCode(city_code, len) {
-  let match_value = 0;
+function setColorCode(city_code) {
+  let match_value = 0;　
+  let k = 0; // 係数（比重）
+  let divisor = 0; // 各比重kの合計値でmatch_valueを除算（正規化）
+
   for (const req in result) {
-    match_value += result[req][city_code];
+    if (!(req === 'popDencity' || req === 'areaFee') && (region.indexOf(select_area) < 0)) {
+      continue;
+    }
+    switch(req){
+      case 'areaFee'    : k = 1; break;
+      case 'popDencity' : k = 2; break;
+      case 'tempAverage': k = 3; break;
+      case 'salary'     : k = 4; break;
+    }
+    match_value += result[req][city_code] * k;
+    divisor     += k;
   }
-  match_value /= len;
-  const gb = ('0' + (1-match_value).toString(16)).slice(-2);
+  //console.log(match_value, match_value/divisor, divisor);
+  const gb = ('0' + Math.round((255*match_value)/divisor).toString(16)).slice(-2);
   return 'ff' + gb + gb;
 }
 
