@@ -18,14 +18,81 @@
     <ul id="dropmenu">
       <li><div>地方選択</div>
         <ul>
-          <li><div onclick="goToSelectArea('全国')">全国（都道府県表示）</div></li>
-          <li><div onclick="goToSelectArea('北海道')">北海道</div></li>
-          <li><div onclick="goToSelectArea('東北')">東北</div></li>
-          <li><div onclick="goToSelectArea('関東')">関東</div></li>
-          <li><div onclick="goToSelectArea('中部')">近畿</div></li>
-          <li><div onclick="goToSelectArea('中国')">中国</div></li>
-          <li><div onclick="goToSelectArea('四国')">四国</div></li>
-          <li><div onclick="goToSelectArea('九州')">九州(沖縄除く)</div></li>
+          <li><div onclick="goToSelectArea('全国', '全国')">全国（都道府県表示）</div></li>
+          <li><div onclick="goToSelectArea('北海道', '北海道')">北海道</div></li>
+          <li><div onclick="goToSelectArea('東北', '東北')">東北</div>
+            <ul>
+              <li><div onclick="goToSelectArea('東北', '青森')">青森県</div></li>
+              <li><div onclick="goToSelectArea('東北', '岩手')">岩手県</div></li>
+              <li><div onclick="goToSelectArea('東北', '宮城')">宮城県</div></li>
+              <li><div onclick="goToSelectArea('東北', '秋田')">秋田県</div></li>
+              <li><div onclick="goToSelectArea('東北', '山形')">山形県</div></li>
+              <li><div onclick="goToSelectArea('東北', '福島')">福島県</div></li>
+            </ul>
+          </li>
+          <li><div onclick="goToSelectArea('関東', '関東')">関東</div>
+            <ul>
+              <li><div onclick="goToSelectArea('関東', '茨城')">茨城県</div></li>
+              <li><div onclick="goToSelectArea('関東', '栃木')">栃木県</div></li>
+              <li><div onclick="goToSelectArea('関東', '群馬')">群馬県</div></li>
+              <li><div onclick="goToSelectArea('関東', '埼玉')">埼玉県</div></li>
+              <li><div onclick="goToSelectArea('関東', '千葉')">千葉県</div></li>
+              <li><div onclick="goToSelectArea('関東', '東京')">東京都</div></li>
+              <li><div onclick="goToSelectArea('関東', '神奈川')">神奈川県</div></li>
+            </ul>
+          </li>
+          <li><div onclick="goToSelectArea('中部', '中部')">中部</div>
+            <ul>
+              <li><div onclick="goToSelectArea('中部', '新潟')">新潟県</div></li>
+              <li><div onclick="goToSelectArea('中部', '富山')">富山県</div></li>
+              <li><div onclick="goToSelectArea('中部', '石川')">石川県</div></li>
+              <li><div onclick="goToSelectArea('中部', '福井')">福井県</div></li>
+              <li><div onclick="goToSelectArea('中部', '山梨')">山梨県</div></li>
+              <li><div onclick="goToSelectArea('中部', '長野')">長野県</div></li>
+              <li><div onclick="goToSelectArea('中部', '岐阜')">岐阜県</div></li>
+              <li><div onclick="goToSelectArea('中部', '静岡')">静岡県</div></li>
+              <li><div onclick="goToSelectArea('中部', '愛知')">愛知県</div></li>
+            </ul>
+          </li>
+          <li><div onclick="goToSelectArea('近畿', '近畿')">近畿</div>
+            <ul>
+              <li><div onclick="goToSelectArea('近畿', '三重')">三重県</div></li>
+              <li><div onclick="goToSelectArea('近畿', '滋賀')">滋賀県</div></li>
+              <li><div onclick="goToSelectArea('近畿', '京都')">京都府</div></li>
+              <li><div onclick="goToSelectArea('近畿', '大阪')">大阪府</div></li>
+              <li><div onclick="goToSelectArea('近畿', '兵庫')">兵庫県</div></li>
+              <li><div onclick="goToSelectArea('近畿', '奈良')">奈良県</div></li>
+              <li><div onclick="goToSelectArea('近畿', '和歌山')">和歌山県</div></li>
+            </ul>
+          </li>
+          <li><div onclick="goToSelectArea('中国', '中国')">中国</div>
+            <ul>
+              <li><div onclick="goToSelectArea('中国', '鳥取')">鳥取県</div></li>
+              <li><div onclick="goToSelectArea('中国', '島根')">島根県</div></li>
+              <li><div onclick="goToSelectArea('中国', '岡山')">岡山県</div></li>
+              <li><div onclick="goToSelectArea('中国', '広島')">広島県</div></li>
+              <li><div onclick="goToSelectArea('中国', '山口')">山口県</div></li>
+            </ul>
+          </li>
+          <li><div onclick="goToSelectArea('四国', '四国')">四国</div>
+            <ul>
+              <li><div onclick="goToSelectArea('四国', '徳島')">徳島県</div></li>
+              <li><div onclick="goToSelectArea('四国', '香川')">香川県</div></li>
+              <li><div onclick="goToSelectArea('四国', '愛媛')">愛媛県</div></li>
+              <li><div onclick="goToSelectArea('四国', '高知')">高知県</div></li>
+            </ul>
+          </li>
+          <li><div onclick="goToSelectArea('九州', '九州')">九州</div>
+            <ul>
+              <li><div onclick="goToSelectArea('九州', '福岡')">福岡県</div></li>
+              <li><div onclick="goToSelectArea('九州', '佐賀')">佐賀県</div></li>
+              <li><div onclick="goToSelectArea('九州', '長崎')">長崎県</div></li>
+              <li><div onclick="goToSelectArea('九州', '熊本')">熊本県</div></li>
+              <li><div onclick="goToSelectArea('九州', '大分')">大分県</div></li>
+              <li><div onclick="goToSelectArea('九州', '宮崎')">宮崎県</div></li>
+              <li><div onclick="goToSelectArea('九州', '鹿児島')">鹿児島県</div></li>
+            </ul>
+          </li>
           <li><div onclick="goToSelectArea('沖縄')">沖縄</div></li>
         </ul>
       </li>

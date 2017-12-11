@@ -17,7 +17,7 @@ const DEF_map_style = function() {
   const dms = {
     // エリアの背景色
     "area": {
-      "default": "dcdcdc"
+      "default": "d0f4c9"
     },
     // テキスト(岡山県,岡山市,....)の色
     "label": {
@@ -29,7 +29,7 @@ const DEF_map_style = function() {
       "state": "555"
     },
     // バックグラウンド(海)の色
-    "bg": "b0c4de"
+    "bg": "5ab4e6"
   };
   return dms;
 }
@@ -40,6 +40,7 @@ var region_style = {
   "zoom_level": 6
 };
 var select_area = '全国';
+var select_region = '全国';
 var request = {};
 var result = {};
 
@@ -70,14 +71,6 @@ function listenRequest(req_type, degree, degree_text) {
     }
   } else {
     request[req_type] = degree;
-    // if (request_view.length) { // 指定要素あり
-    //   // 指定要素があり，要求レベルが異なっている場合，要素を修正
-    //   if (request_view.attr('class') !== degree_text) {
-    //     editRequestView(req_type, degree_text, '修正')
-    //   }
-    // } else { // 指定要素がなければ追加
-    //   editRequestView(req_type, degree_text, '追加')
-    // }
     if (!request_view.text()) {// 指定要素が空なら追加
       editRequestView(req_type, degree_text, '追加')
     }　else {
@@ -118,7 +111,7 @@ function setNormParam(request_name, request_degree) {
   if (region.indexOf(select_area) >= 0) {
     dataset = dataset_todofuken;
   } else {
-    dataset = dataset_shikuchoson[select_area];
+    dataset = dataset_shikuchoson[select_region];
   }
 
   result[request_name] = {};
@@ -164,13 +157,14 @@ function makeHeatLayer(zoom_flag) {
 }
 
 // 選択地域の色変更と地域への画面遷移
-function goToSelectArea(area) {
+function goToSelectArea(area_heat, area_zoom) {
   // lat, lng, zoom_level の取得
-  const view_area = setViewArea(area);
+  const view_area = setViewArea(area_zoom);
   for (let key in view_area) {
     region_style[key] = view_area[key]
   }
-  select_area = area;
+  select_region = area_heat;
+  select_area = area_zoom;
 
   makeHeatLayer(1);
 
