@@ -197,10 +197,20 @@ body {
   color: #eff7b1;
 }
 
+#request_area {
+  margin: 0 auto;
+  text-align: center;
+  width: 8em;
+  font-size: 50px;
+  border:#008800 solid 3px;
+  border-radius: 15px;
+  background-color: #aaDDaa;
+}
+
 #request {
   text-align: center;
   justify-content: center;
-  margin: 5% 10%;
+  margin: 10px 10%;
   font-size: 30px;
 }
 
@@ -215,4 +225,9 @@ body {
 #request div.important {
   border:#ff0000 solid 3px;
   background-color: #ffaaaa;
+}
+
+#request div.unuse {
+  border: 0px;
+  background-color: #aaa;
 }

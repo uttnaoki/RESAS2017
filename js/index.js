@@ -48,11 +48,11 @@ function editRequestView(req_type, degree_text, action) {
   switch (action) {
     case '追加':
       $('#' + req_type).addClass(degree_text + ' active')
-        .text(req_type + '=' + degree_text);
+        .text(request_set[req_type] + '=' + degree_text);
       break;
     case '修正':
       $('#' + req_type).attr('class', degree_text + ' active')
-        .text(req_type + '=' + degree_text);
+        .text(request_set[req_type] + '=' + degree_text);
       break;
     case '削除':
       $('#' + req_type).removeClass().text("");
@@ -165,6 +165,16 @@ function goToSelectArea(area_heat, area_zoom) {
   }
   select_region = area_heat;
   select_area = area_zoom;
+  for (let r in request_set) {
+    if (!(r === 'popDencity' || r === 'areaFee')) {
+      if (region.indexOf(select_area) >= 0){
+        $('#' + r).removeClass('unuse')
+      } else {
+        $('#' + r).addClass('unuse')
+      }
+    }
+  }
+  $('#request_area').text('地域＝' + area_zoom)
 
   makeHeatLayer(1);
 
