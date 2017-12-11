@@ -22,7 +22,8 @@ const DEF_map_style = function() {
     },
     // テキスト(岡山県,岡山市,....)の色
     "label": {
-      "default": "696969"
+      "default": "696969",
+      "state": "000"
     },
     // エリアの境界線の色
     "border": {
