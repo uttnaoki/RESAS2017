@@ -3,7 +3,8 @@ const request_set = {
   'popDencity': '人口密度',
   'areaFee': '土地代',
   'salary': '賃金',
-  'tempAverage': '気候'
+  'tempAverage': '気候',
+  'jobOffers': '有効求人倍率'
 }
 for (const r in request_set) {
   $('#request').append('<div id="' + r + '"></div>')
