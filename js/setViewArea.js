@@ -58,9 +58,9 @@ function setViewArea(r) {
       break;
     case '九州':
       view_area = {
-        "lat": 30.867987,
-        "lng": 130.787109,
-        "zoom_level": 7
+        "lat": 32.7808,
+        "lng": 130.983362,
+        "zoom_level": 9
       };
       break;
     case '沖縄':
