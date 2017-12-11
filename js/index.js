@@ -1,3 +1,14 @@
+const region = ['全国', '北海道', '東北', '関東', '中部', '近畿', '中国', '四国', '九州'];
+const request_set = {
+  'popDencity': '人口密度',
+  'areaFee': '土地代',
+  'salary': '賃金',
+  'tempAverage': '気候'
+}
+for (const r in request_set) {
+  $('#request').append('<div id="' + r + '"></div>')
+}
+
 const region_color = {
   'area': "aaaaaa"
 };
@@ -32,11 +43,48 @@ var select_area = '全国';
 var request = {};
 var result = {};
 
-function listenRequest(type, value) {
-  if (value == 0) {
-    delete request[type];
+function editRequestView(req_type, degree_text, action) {
+  switch (action) {
+    case '追加':
+      $('#' + req_type).addClass(degree_text + ' active')
+        .text(req_type + '=' + degree_text);
+      break;
+    case '修正':
+      $('#' + req_type).attr('class', degree_text + ' active')
+        .text(req_type + '=' + degree_text);
+      break;
+    case '削除':
+      $('#' + req_type).removeClass().text("");
+      break;
+    default:
+  }
+}
+
+function listenRequest(req_type, degree, degree_text) {
+  let request_view = $('#' + req_type);
+  if (degree == 0) {
+    delete request[req_type];
+    // リクエストビューに指定要素があれば中身を削除
+    if (request_view.hasClass('active')) {
+      editRequestView(req_type, degree_text, '削除')
+    }
   } else {
-    request[type] = value;
+    request[req_type] = degree;
+    // if (request_view.length) { // 指定要素あり
+    //   // 指定要素があり，要求レベルが異なっている場合，要素を修正
+    //   if (request_view.attr('class') !== degree_text) {
+    //     editRequestView(req_type, degree_text, '修正')
+    //   }
+    // } else { // 指定要素がなければ追加
+    //   editRequestView(req_type, degree_text, '追加')
+    // }
+    if (!request_view.text()) {// 指定要素が空なら追加
+      editRequestView(req_type, degree_text, '追加')
+    }　else {
+      if (!request_view.hasClass(degree_text)) {
+        editRequestView(req_type, degree_text, '修正')
+      }
+    }
   }
   makeHeatLayer();
 }
@@ -67,7 +115,7 @@ function normalization(req, value, degree){
 
 function setNormParam(request_name, request_degree) {
   let dataset;
-  if (select_area == '全国') {
+  if (region.indexOf(select_area) >= 0) {
     dataset = dataset_todofuken;
   } else {
     dataset = dataset_shikuchoson[select_area];

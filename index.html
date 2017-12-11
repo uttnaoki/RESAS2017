@@ -31,45 +31,46 @@
       </li>
       <li><div>人口密度</div>
         <ul>
-          <li><div onclick="listenRequest('popDencity','0')">指定しない</div></li>
-          <li><div onclick="listenRequest('popDencity','1')">にぎやか</div></li>
-          <li><div onclick="listenRequest('popDencity','2')">ややにぎやか</div></li>
-          <li><div onclick="listenRequest('popDencity','3')">ふつう</div></li>
-          <li><div onclick="listenRequest('popDencity','4')">やや静か</div></li>
-          <li><div onclick="listenRequest('popDencity','5')">静か</div></li>
+          <li><div onclick="listenRequest('popDencity', 0, '指定しない')">指定しない</div></li>
+          <li><div onclick="listenRequest('popDencity', 1, 'にぎやか')">にぎやか</div></li>
+          <li><div onclick="listenRequest('popDencity', 2, 'ややにぎやか')">ややにぎやか</div></li>
+          <li><div onclick="listenRequest('popDencity', 3, 'ふつう')">ふつう</div></li>
+          <li><div onclick="listenRequest('popDencity', 4, 'やや静か')">やや静か</div></li>
+          <li><div onclick="listenRequest('popDencity', 5, '静か')">静か</div></li>
         </ul>
       </li>
       <li><div>土地代</div>
         <ul>
-          <li><div onclick="listenRequest('areaFee', 0)">指定しない</div></li>
-          <li><div onclick="listenRequest('areaFee', 1)">高い</div></li>
-          <li><div onclick="listenRequest('areaFee', 2)">やや高い</div></li>
-          <li><div onclick="listenRequest('areaFee', 3)">ふつう</div></li>
-          <li><div onclick="listenRequest('areaFee', 4)">やや安い</div></li>
-          <li><div onclick="listenRequest('areaFee', 5)">安い</div></li>
+          <li><div onclick="listenRequest('areaFee', 0, '指定しない')">指定しない</div></li>
+          <li><div onclick="listenRequest('areaFee', 1, '高い')">高い</div></li>
+          <li><div onclick="listenRequest('areaFee', 2, 'やや高い')">やや高い</div></li>
+          <li><div onclick="listenRequest('areaFee', 3, 'ふつう')">ふつう</div></li>
+          <li><div onclick="listenRequest('areaFee', 4, 'やや安い')">やや安い</div></li>
+          <li><div onclick="listenRequest('areaFee', 5, '安い')">安い</div></li>
         </ul>
       </li>
       <li><div>賃金</div>
         <ul>
-          <li><div onclick="listenRequest('salary', 0)">指定しない</div></li>
-          <li><div onclick="listenRequest('salary', 1)">高い</div></li>
-          <li><div onclick="listenRequest('salary', 2)">やや高い</div></li>
-          <li><div onclick="listenRequest('salary', 3)">ふつう</div></li>
-          <li><div onclick="listenRequest('salary', 4)">やや低い</div></li>
-          <li><div onclick="listenRequest('salary', 5)">低い</div></li>
+          <li><div onclick="listenRequest('salary', 0, '指定しない')">指定しない</div></li>
+          <li><div onclick="listenRequest('salary', 1, '高い')">高い</div></li>
+          <li><div onclick="listenRequest('salary', 2, 'やや高い')">やや高い</div></li>
+          <li><div onclick="listenRequest('salary', 3, 'ふつう')">ふつう</div></li>
+          <li><div onclick="listenRequest('salary', 4, 'やや低い')">やや低い</div></li>
+          <li><div onclick="listenRequest('salary', 5, '低い')">低い</div></li>
         </ul>
       </li>
       <li><div>気候</div>
         <ul>
-          <li><div onclick="listenRequest('tempAverage', 0)">指定しない</div></li>
-          <li><div onclick="listenRequest('tempAverage', 1)">暖かい</div></li>
-          <li><div onclick="listenRequest('tempAverage', 2)">やや暖かい</div></li>
-          <li><div onclick="listenRequest('tempAverage', 3)">ふつう</div></li>
-          <li><div onclick="listenRequest('tempAverage', 4)">やや寒い</div></li>
-          <li><div onclick="listenRequest('tempAverage', 5)">寒い</div></li>
+          <li><div onclick="listenRequest('tempAverage', 0, '指定しない')">指定しない</div></li>
+          <li><div onclick="listenRequest('tempAverage', 1, '暖かい')">暖かい</div></li>
+          <li><div onclick="listenRequest('tempAverage', 2, 'やや暖かい')">やや暖かい</div></li>
+          <li><div onclick="listenRequest('tempAverage', 3, 'ふつう')">ふつう</div></li>
+          <li><div onclick="listenRequest('tempAverage', 4, 'やや寒い')">やや寒い</div></li>
+          <li><div onclick="listenRequest('tempAverage', 5, '寒い')">寒い</div></li>
         </ul>
       </li>
     </ul>
+    <div id="request" class="adjust"></div>
     <div id="map"></div>
     <!-- <script type="text/javascript" src="js/city_code.js"></script> -->
     <script type="text/javascript" src="js/dataset_shikuchoson.json"></script>
