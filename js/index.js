@@ -95,6 +95,9 @@ function listenRequest(req_type, degree, degree_text) {
 // 希望値に対する地域のマッチ度を返却(正規化処理)
 function normalization(req, value, degree, region_flag){
   let norm_val = 0;
+  if (value == 0) {
+    return -1;
+  }
   if(region_flag == 0){ // 都道府県別の基準
     switch (req) {
       case 'areaFee':
@@ -185,6 +188,9 @@ function setColorCode(city_code) {
   let divisor = 0; // 各比重kの合計値でmatch_valueを除算（正規化）
 
   for (const req in result) {
+    if (result[req][city_code] == -1) {
+      return 0;
+    }
     if (!(req === 'popDencity' || req === 'areaFee') && (region.indexOf(select_area) < 0)) {
       continue;
     }
@@ -216,7 +222,10 @@ function makeHeatLayer(zoom_flag) {
   const len = Object.keys(result).length;
   if (key) {
     for (let i in result[key]){
-      area_color[i] = setColorCode(i, len);
+      const cc = setColorCode(i, len);
+      if (cc) {
+        area_color[i] = cc;
+      }
     }
     let map_style = DEF_map_style();
     map_style.area = area_color;
