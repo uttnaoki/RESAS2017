@@ -190,9 +190,10 @@ function setColorCode(city_code) {
     }
     switch(req){
       case 'areaFee'    : k = 1; break;
-      case 'popDencity' : k = 2; break;
-      case 'tempAverage': k = 3; break;
-      case 'salary'     : k = 4; break;
+      case 'popDencity' : k = 1; break;
+      case 'tempAverage': k = 1; break;
+      case 'salary'     : k = 1; break;
+      case 'jobOffers'  : k = 1; break;
     }
     match_value += result[req][city_code] * k;
     divisor     += k;
