@@ -67,7 +67,7 @@ function setViewArea(r) {
       view_area = {
         "lat": 25.77111111,
         "lng": 126.64,
-        "zoom_level": 8
+        "zoom_level": 9
       };
       break;
 

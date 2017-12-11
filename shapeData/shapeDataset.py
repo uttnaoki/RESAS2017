@@ -5,9 +5,9 @@ import math
 # f = open('dataset.csv', 'r', encoding='utf-8')
 f = open('dataset.csv', 'r')
 input_data = csv.reader(f)
-region = ['北海道', '東北', '関東', '中部', '近畿', '中国', '四国', '九州'];
+region = ['北海道', '東北', '関東', '中部', '近畿', '中国', '四国', '九州', '沖縄'];
 # region = [[1, 1], [2, 7], [8, 14], [15, 23], [24, 30], [31, 35], [36, 39], [40, 47]]
-lastID = [1, 7, 14, 23, 30, 35, 39, 47]
+lastID = [1, 7, 14, 23, 30, 35, 39, 46, 47]
 index = 0
 # s = region[index][0]
 # e = region[index][1]
