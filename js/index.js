@@ -292,7 +292,7 @@ window.onload = function() {
   map.setLayerSet("blankmap");
   map.bind('click', function(latlng){
     query = '?lat=' + latlng.Lat + '&lon=' + latlng.Lon
-    $.get('http://www.finds.jp/ws/rgeocode.php' + query,
+    $.get('https://www.finds.jp/ws/rgeocode.php' + query,
       function (data) {
         // 都道府県名: pname
         // 市区町村名: mname
