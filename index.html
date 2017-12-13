@@ -15,6 +15,7 @@
     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> -->
   <link rel="stylesheet" href="css/index.css">
   <body>
+    <div><center><font size="7"><b><face="sans-serif">あなたにぴったりな地域はどこ？</face></b></font></center></div>
     <ul id="dropmenu">
       <li><div>地方選択</div>
         <ul>
@@ -149,10 +150,37 @@
     </ul>
     <div id="request_area">地域＝全国</div>
     <div id="request" class="adjust"></div>
+
+    <div class='center main_field'>
     <div id="map"></div>
-    <!-- <script type="text/javascript" src="js/city_code.js"></script> -->
+    <div id="local_information">
+      <table>
+        <thead>
+          <tr>
+            <th scope="cols"　id="name" class="left_column">市町村名</th>
+            <th scope="cols" id="LI_cityName" class="right_column"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" class="left_column">土地代</th>
+            <td id="LI_areaFee" class="right_column"></td>
+          </tr>
+          <tr>
+            <th scope="row" class="left_column">人口密度</th>
+            <td id="LI_popDencity" class="right_column"></td>
+          </tr>
+          <tr>
+            <th scope="row" class="left_column">ホームページ</th>
+            <td id="LI_hp" class="right_column"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
     <script type="text/javascript" src="js/dataset_shikuchoson.json"></script>
     <script type="text/javascript" src="js/dataset_todofuken.json"></script>
+    <script type="text/javascript" src="js/dataset_LocalInformation.json"></script>
     <script type="text/javascript" src="js/setViewArea.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
   </body>

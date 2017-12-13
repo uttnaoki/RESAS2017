@@ -296,7 +296,31 @@ window.onload = function() {
       function (data) {
         // 都道府県名: pname
         // 市区町村名: mname
-        console.log(data.match(/<pname>(.*?)<\/pname>/g)[0].slice(7,-8));
+        let city_name = data.match(/<mname>(.*?)<\/mname>/g)[0].slice(7,-8);
+        city_name = city_name.split(' ')
+        // xx郡 yy市 の yy市のみを取得
+        city_name = city_name.pop();
+        const LI = dataset_LocalInformation[city_name];
+        let info_areaFee, info_popDencity, info_hp;
+        if (LI.areaFee !== ' ') {
+          info_areaFee = '<p>' + LI.areaFee
+            + ' (円/平方メートル)</p>'
+            + '<p>(' + LI.areaFee_rank + '位/1648中)</p>';
+        } else {
+          info_areaFee = 'データがありません。'
+        }
+        if (LI.popDencity !== ' ') {
+          info_popDencity = '<p>' + Math.round(LI.popDencity*100)/100
+            + ' (人/平方キロメートル)</p>'
+            + '<p>(' + LI.popDencity_rank + '位/822中)</p>';
+        } else {
+          info_popDencity = 'データがありません。'
+        }
+        info_hp = '<a href="' + LI.hp + '"><p>' + LI.hp + '</p></a>'
+        $('#LI_cityName').text(city_name);
+        $('#LI_areaFee').html(info_areaFee)
+        $('#LI_popDencity').html(info_popDencity);
+        $('#LI_hp').html(info_hp);
       }
     )
 	});
