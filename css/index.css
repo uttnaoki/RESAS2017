@@ -247,6 +247,7 @@ body {
   width: 10em;
 }
 #local_information .right_column {
+  width: 18em;
 }
 #local_information table td p {
   margin: 0;
