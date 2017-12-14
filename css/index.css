@@ -1,6 +1,6 @@
 html, body { height: 100%; }
 body {
-  margin-top: 2%;
+  margin-top: 1%;
 }
 
 .adjust{
@@ -11,6 +11,18 @@ body {
 .center {
   justify-content: center;
   text-align: center;
+}
+
+#title {
+  text-align: center;
+  font-family: 'Lucida Grande', Meiryo, sans-serif;
+  font-weight: bold;
+}
+#main_title {
+  font-size: 3em;
+}
+#sub_title {
+  font-size: 2em;
 }
 
 #form {
