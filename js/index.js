@@ -304,15 +304,15 @@ window.onload = function() {
         let info_areaFee, info_popDencity, info_hp;
         if (LI.areaFee !== ' ') {
           info_areaFee = '<p>' + LI.areaFee
-            + ' (円/平方メートル)</p>'
-            + '<p>(' + LI.areaFee_rank + '位/1648中)</p>';
+            + ' (円/m&sup2)</p>'
+            + '<p>(' + LI.areaFee_rank + '位/1648中)<sup>(1)</sup></p>';
         } else {
           info_areaFee = 'データがありません。'
         }
         if (LI.popDencity !== ' ') {
           info_popDencity = '<p>' + Math.round(LI.popDencity*100)/100
-            + ' (人/平方キロメートル)</p>'
-            + '<p>(' + LI.popDencity_rank + '位/822中)</p>';
+            + ' (人/km&sup2)</p>'
+            + '<p>(' + LI.popDencity_rank + '位/822中)<sup>(2)</sup></p>';
         } else {
           info_popDencity = 'データがありません。'
         }

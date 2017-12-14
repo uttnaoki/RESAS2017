@@ -226,8 +226,9 @@ body {
 .main_field {
   height: 65%;
 }
-.main_field div {
+.main_field .entry {
   height: 100%;
+  margin-top: 0px;
 }
 
 #map {
@@ -240,6 +241,17 @@ body {
 #local_information {
   display: inline-block;
   width: 30em;
+  vertical-align: top;
+}
+
+#local_information_comments {
+  margin-top: 1.5em;
+  padding-left: 2em;
+  text-align: left;
+}
+#local_information_comments p{
+  margin: 0;
+  padding: 0;
 }
 
 #local_information .left_column {

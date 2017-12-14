@@ -100,11 +100,11 @@
       <li><div>人口密度</div>
         <ul>
           <li><div onclick="listenRequest('popDencity', 0, '指定しない')">指定しない</div></li>
-          <li><div onclick="listenRequest('popDencity', 1, 'にぎやか')">にぎやか</div></li>
-          <li><div onclick="listenRequest('popDencity', 2, 'ややにぎやか')">ややにぎやか</div></li>
-          <li><div onclick="listenRequest('popDencity', 3, 'ふつう')">ふつう</div></li>
-          <li><div onclick="listenRequest('popDencity', 4, 'やや静か')">やや静か</div></li>
-          <li><div onclick="listenRequest('popDencity', 5, '静か')">静か</div></li>
+          <li><div onclick="listenRequest('popDencity', 1, 'にぎやか')">高い</div></li>
+          <li><div onclick="listenRequest('popDencity', 2, 'ややにぎやか')">やや高い</div></li>
+          <li><div onclick="listenRequest('popDencity', 3, 'ふつう')">平均的</div></li>
+          <li><div onclick="listenRequest('popDencity', 4, 'やや静か')">やや低い</div></li>
+          <li><div onclick="listenRequest('popDencity', 5, '静か')">低い</div></li>
         </ul>
       </li>
       <li><div>土地代</div>
@@ -112,7 +112,7 @@
           <li><div onclick="listenRequest('areaFee', 0, '指定しない')">指定しない</div></li>
           <li><div onclick="listenRequest('areaFee', 1, '高い')">高い</div></li>
           <li><div onclick="listenRequest('areaFee', 2, 'やや高い')">やや高い</div></li>
-          <li><div onclick="listenRequest('areaFee', 3, 'ふつう')">ふつう</div></li>
+          <li><div onclick="listenRequest('areaFee', 3, 'ふつう')">平均的</div></li>
           <li><div onclick="listenRequest('areaFee', 4, 'やや安い')">やや安い</div></li>
           <li><div onclick="listenRequest('areaFee', 5, '安い')">安い</div></li>
         </ul>
@@ -122,7 +122,7 @@
           <li><div onclick="listenRequest('salary', 0, '指定しない')">指定しない</div></li>
           <li><div onclick="listenRequest('salary', 1, '高い')">高い</div></li>
           <li><div onclick="listenRequest('salary', 2, 'やや高い')">やや高い</div></li>
-          <li><div onclick="listenRequest('salary', 3, 'ふつう')">ふつう</div></li>
+          <li><div onclick="listenRequest('salary', 3, 'ふつう')">平均的</div></li>
           <li><div onclick="listenRequest('salary', 4, 'やや低い')">やや低い</div></li>
           <li><div onclick="listenRequest('salary', 5, '低い')">低い</div></li>
         </ul>
@@ -130,11 +130,11 @@
       <li><div>有効求人倍率</div>
         <ul>
           <li><div onclick="listenRequest('jobOffers', 0, '指定しない')">指定しない</div></li>
-          <li><div onclick="listenRequest('jobOffers', 1, '高い')">高い</div></li>
-          <li><div onclick="listenRequest('jobOffers', 2, 'やや高い')">やや高い</div></li>
-          <li><div onclick="listenRequest('jobOffers', 3, 'ふつう')">ふつう</div></li>
-          <li><div onclick="listenRequest('jobOffers', 4, 'やや低い')">やや低い</div></li>
-          <li><div onclick="listenRequest('jobOffers', 5, '低い')">低い</div></li>
+          <li><div onclick="listenRequest('jobOffers', 1, '高い')">就職しやすい</div></li>
+          <li><div onclick="listenRequest('jobOffers', 2, 'やや高い')">やや就職しやすい</div></li>
+          <li><div onclick="listenRequest('jobOffers', 3, 'ふつう')">平均的</div></li>
+          <li><div onclick="listenRequest('jobOffers', 4, 'やや低い')">やや就職しにくい</div></li>
+          <li><div onclick="listenRequest('jobOffers', 5, '低い')">就職しにくい</div></li>
         </ul>
       </li>
       <li><div>気候</div>
@@ -142,7 +142,7 @@
           <li><div onclick="listenRequest('tempAverage', 0, '指定しない')">指定しない</div></li>
           <li><div onclick="listenRequest('tempAverage', 1, '暖かい')">暖かい</div></li>
           <li><div onclick="listenRequest('tempAverage', 2, 'やや暖かい')">やや暖かい</div></li>
-          <li><div onclick="listenRequest('tempAverage', 3, 'ふつう')">ふつう</div></li>
+          <li><div onclick="listenRequest('tempAverage', 3, 'ふつう')">平均的</div></li>
           <li><div onclick="listenRequest('tempAverage', 4, 'やや寒い')">やや寒い</div></li>
           <li><div onclick="listenRequest('tempAverage', 5, '寒い')">寒い</div></li>
         </ul>
@@ -152,31 +152,39 @@
     <div id="request" class="adjust"></div>
 
     <div class='center main_field'>
-    <div id="map"></div>
-    <div id="local_information">
-      <table>
-        <thead>
-          <tr>
-            <th scope="cols"　id="name" class="left_column">市町村名</th>
-            <th scope="cols" id="LI_cityName" class="right_column"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row" class="left_column">土地代</th>
-            <td id="LI_areaFee" class="right_column"></td>
-          </tr>
-          <tr>
-            <th scope="row" class="left_column">人口密度</th>
-            <td id="LI_popDencity" class="right_column"></td>
-          </tr>
-          <tr>
-            <th scope="row" class="left_column">ホームページ</th>
-            <td id="LI_hp" class="right_column"></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <div id="map" class='entry'></div>
+      <div id="local_information" class='entry'>
+        <table>
+          <thead>
+            <tr>
+              <th scope="cols"　id="name" class="left_column">市町村名</th>
+              <th scope="cols" id="LI_cityName" class="right_column"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" class="left_column">土地代</th>
+              <td id="LI_areaFee" class="right_column"></td>
+            </tr>
+            <tr>
+              <th scope="row" class="left_column">人口密度</th>
+              <td id="LI_popDencity" class="right_column"></td>
+            </tr>
+            <tr>
+              <th scope="row" class="left_column">ホームページ</th>
+              <td id="LI_hp" class="right_column"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div id="local_information_comments">
+          <p>
+            (1) 土地代の順位：価格の高さ順（降順）
+          </p>
+          <p>
+            (2) 人口密度の順位：高さ順（降順）
+          </p>
+        </div>
+      </div>
     </div>
     <script type="text/javascript" src="js/dataset_shikuchoson.json"></script>
     <script type="text/javascript" src="js/dataset_todofuken.json"></script>
