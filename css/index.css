@@ -224,14 +224,17 @@ body {
   border-radius: 15px;
   background-color: #bde9ba;
 }
-
-#request div.important {
+#request div.active.important {
   border:#ff0000 solid 3px;
   background-color: #ffaaaa;
 }
 
 #request div.unuse {
   border: 0px;
+  background-color: #aaa;
+}
+#request div.unuse.important {
+  border:#ff0000 solid 3px;
   background-color: #aaa;
 }
 

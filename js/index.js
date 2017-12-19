@@ -7,8 +7,16 @@ const request_set = {
   'jobOffers': '有効求人倍率'
 }
 for (const r in request_set) {
-  $('#request').append('<div id="' + r + '"></div>')
+  $('#request').append('<div id="' + r + '" class="request_tag"></div>')
 }
+$('.request_tag').on('click', function(d, i) {
+  tmp1 = this;
+  if ($(this).hasClass('important')) {
+    $(this).removeClass('important')
+  } else {
+    $(this).addClass('important')
+  }
+})
 
 const region_color = {
   'area': "aaaaaa"
@@ -53,11 +61,17 @@ function editRequestView(req_type, degree_text, action) {
         .text(request_set[req_type] + '=' + degree_text);
       break;
     case '修正':
-      $('#' + req_type).attr('class', degree_text + ' active')
+      let new_class;
+      if ($('#' + req_type).hasClass('important')) {
+        new_class = degree_text + ' active important'
+      } else {
+        new_class = degree_text + ' active'
+      }
+      $('#' + req_type).attr('class', new_class)
         .text(request_set[req_type] + '=' + degree_text);
       break;
     case '削除':
-      $('#' + req_type).removeClass().text("");
+      $('#' + req_type).removeClass('active').removeClass('important').text("");
       break;
     default:
   }
