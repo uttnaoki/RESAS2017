@@ -23,6 +23,10 @@ body {
 }
 #sub_title {
   font-size: 2em;
+  margin-bottom: 0.5em;
+}
+#main_exp {
+  margin-bottom: 0.5em;
 }
 
 #form {
@@ -62,6 +66,7 @@ body {
   list-style-type: none;
   width: 100%;
   height: 60px;
+  margin-top: 0;
   margin-bottom: 20px;
   padding-left: 2%;
   padding-right: 1%;
